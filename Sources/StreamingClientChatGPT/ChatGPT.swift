@@ -89,18 +89,18 @@ public struct ChatGPT {
         }
     }
     public struct CompletionChunk: Codable {
-        let id: String
-        let object: String
-        let created: Int
-        let model: String
-        let systemFingerprint: String?
-        let choices: [Choice]
+        public let id: String
+        public let object: String
+        public let created: Int
+        public let model: String
+        public let systemFingerprint: String?
+        public let choices: [Choice]
         public struct Choice: Codable {
-            let index: Int
-            let delta: Delta
-            let finishReason: String?
+            public let index: Int
+            public let delta: Delta
+            public let finishReason: String?
             public struct Delta: Codable {
-                let content: String?
+                public let content: String?
             }
         }
     }
