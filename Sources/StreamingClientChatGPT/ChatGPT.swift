@@ -49,6 +49,28 @@ public struct ChatGPT {
         ///
         /// The returned text will not contain the stop sequence.
         public var stop: [String]? = nil
+        public init(
+            model: String = "gpt-3.5-turbo",
+            temperature: Double? = nil,
+            n: Int? = nil, maxTokens: Int? = nil,
+            topP: Double? = nil,
+            frequencyPenalty: Double? = nil,
+            presencePenalty: Double? = nil,
+            logprobs: Int? = nil,
+            responseFormat: ResponseFormat? = nil,
+            stop: [String]? = nil
+        ) {
+            self.model = model
+            self.temperature = temperature
+            self.n = n
+            self.maxTokens = maxTokens
+            self.topP = topP
+            self.frequencyPenalty = frequencyPenalty
+            self.presencePenalty = presencePenalty
+            self.logprobs = logprobs
+            self.responseFormat = responseFormat
+            self.stop = stop
+        }
         public struct ResponseFormat: Codable {
             fileprivate var type: FormatType?
             fileprivate enum FormatType: String, Codable {
