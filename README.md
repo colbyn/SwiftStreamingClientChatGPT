@@ -14,7 +14,9 @@ targets: [
     // Targets can depend on other targets in this package and products from dependencies.
     .target(
         name: "MyApp",
-        dependencies: [ .product(name: "StreamingClientChatGPT", package: "SwiftStreamingClientChatGPT") ]
+        dependencies: [
+            .product(name: "StreamingClientChatGPT", package: "SwiftStreamingClientChatGPT")
+        ]
     ),
 ]
 ```
