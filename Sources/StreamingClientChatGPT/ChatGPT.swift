@@ -82,8 +82,8 @@ public struct ChatGPT {
     }
     
     public struct Message: Encodable {
-        let role: Role
-        let content: String
+        public let role: Role
+        public let content: String
         public enum Role: String, Codable {
             case user, assistant, system
         }
