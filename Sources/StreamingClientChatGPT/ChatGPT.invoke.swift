@@ -64,7 +64,8 @@ fileprivate class StreamingSession: NSObject, URLSessionDataDelegate {
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if let error = error, error.localizedDescription != "cancelled" {
-            fatalError("TODO")
+            print("UNHANDELED ERROR", error)
+//            fatalError("TODO")
         }
         self.stop()
     }
