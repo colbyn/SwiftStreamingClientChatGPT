@@ -17,11 +17,14 @@ fileprivate class StreamingSession: NSObject, URLSessionDataDelegate {
     private let logger: Optional<(String) -> ()>
     private var finishedSemaphore = DispatchSemaphore(value: 0)
     
-    init(logger: @escaping (String) -> (), apiToken: String) {
+    /// timeoutIntervalForRequest: Time in seconds.
+    init(logger: @escaping (String) -> (), apiToken: String, timeoutIntervalForRequest: TimeInterval) {
         self.logger = logger
         self.apiToken = apiToken
         super.init()
-        self.urlSession = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = timeoutIntervalForRequest // Time in seconds
+        self.urlSession = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
     }
     
     func connect(requestPayload: RequestPayload) -> [ ChatGPT.CompletionChunk ] {
@@ -34,6 +37,7 @@ fileprivate class StreamingSession: NSObject, URLSessionDataDelegate {
         request.addValue("Bearer \(apiToken)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = requestPayload
+        
         self.dataTask = urlSession.dataTask(with: request)
         finishedSemaphore = DispatchSemaphore(value: 0)
         self.dataTask?.resume()
