@@ -126,9 +126,11 @@ extension ChatGPT {
         configuration: Configuration,
         messages: [Message],
         apiToken: String,
-        logger: @escaping (String) -> ()
+        logger: @escaping (String) -> (),
+        /// timeoutIntervalForRequest: Time in seconds.
+        timeoutIntervalForRequest: TimeInterval
     ) -> [ChatGPT.CompletionChunk] {
-        let sseClient = StreamingSession(logger: logger, apiToken: apiToken)
+        let sseClient = StreamingSession(logger: logger, apiToken: apiToken, timeoutIntervalForRequest: timeoutIntervalForRequest)
         let requestPayload = StreamingSession.RequestPayload(
             model: configuration.model,
             messages: messages,
